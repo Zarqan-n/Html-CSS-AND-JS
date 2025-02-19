@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        *{
+    margin: 0;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, Geneva, Tahoma, sans-serif;
+}
+button{
+    border-radius: 5px;
+    border: 1px solid;
+    padding: 5px 10px;
+    margin: 0px 5px;
+    min-width: 60px;
+}
+#increase{
+    background-color: rgb(9, 255, 206);
+    /* transition: all 0.25s ease-in-out; */
+}
+h2{
+    margin-bottom: 40px;
+    font-size: 32px;
+    animation: ch 10s ease-in-out infinite;
+}
+/* @keyframes ch{
+    0%{
+        color: rgb(83, 253, 83);
+        transform: scale(1.5);
+    }
+    25%{
+        color: rgb(255, 132, 110);
+        transform: scale(1);
+
+    }
+    50%{
+        color: rgb(222, 253, 83);
+        transform: scale(1.5);
+
+    }
+    75%{
+        color: rgb(9, 255, 206);
+        transform: scale(1);
+
+    }
+    100%{
+        color: rgb(183, 27, 255);
+        transform: scale(1.5s);
+    }
+} */
+.flex{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.wrap{
+    background-color: rgb(181, 239, 189);
+    padding: 20px 10px;
+    border-radius: 10px;
+    height: fit-content;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.537);
+}
+.wrap h1{
+    margin-bottom: 20px ;
+}
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: beige;
+}
+#start{
+    background-color: rgb(83, 253, 83);
+    font-weight: 600;
+}
+#stop{
+    background-color: rgb(255, 132, 110);
+    font-weight: 600;
+
+}
+#reset{
+    background-color: rgb(222, 253, 83);
+    font-weight: 600;
+
+}
+    </style>
+</head>
+
+<body class="flex">
+    <h2>Timer</h2>
+    <div class="wrap flex">
+        <h1>00:00</h1>
+        <div class="btns">
+            <button id="start" >Start</button>
+            <button id="stop" >Stop</button>
+            <button id="reset" >Reset</button>
+            <button id="increase" >+10s</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        const start = document.querySelector('#start');
+const stopi = document.querySelector('#stop');
+const reset = document.querySelector('#reset');
+let time = document.querySelector('h1');
+const increase = document.querySelector('#increase')
+let min = 0;
+let sec = 1;
+let intervalId;
+start.addEventListener('click', () => {
+    intervalId=setInterval(run, 1000);
+})
+
+stopi.addEventListener('click', () => {
+    clearInterval(intervalId);
+})
+reset.addEventListener('click', () => {
+    clearInterval(intervalId);
+    sec = 0;
+    min = 0;
+    time.innerText = `${min}:${sec}`;
+})
+increase.addEventListener('click', () => {
+    sec+=10;
+})
+function run() {
+    if(sec>=60){
+        min++;
+        sec=0;
+    }
+    time.innerText =`${min}:${sec}`;
+    sec++
+}
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOCUS</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', Courier, monospace;
+            display: flex;
+            background-color: rgb(236, 245, 245);
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+        }
+
+        .me {
+            text-align: center;
+            font-size: 10px;
+        }
+
+        h1 {
+            font-size: 48px;
+        }
+
+        h2 img {
+            margin-left: 10px;
+            height: 30px;
+        }
+
+        h2 {
+            display: flex;
+            align-items: center;
+            margin: 0;
+        }
+
+        .box {
+            width: 80vw;
+            max-width: 660px;
+            max-height: 600px;
+            min-height: fit-content;
+            background-color: #ffffff;
+            margin-bottom: 10px;
+            box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            padding: 32px 48px 0px 48px;
+        }
+
+        .bar {
+            width: 100%;
+            height: 30px;
+            background-color: #49a3001e;
+            border-radius: 15px;
+        }
+
+        .progress {
+            max-width: 100%;
+            width: 0%;
+            height: 100%;
+            border-radius: 15px;
+            background-color: #48A300;
+            color: rgb(255, 255, 255);
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            text-indent: 12px;
+            text-wrap: nowrap;
+            transition: all 0.25s ease-in-out;
+        }
+
+        @media (max-width:700px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            .bar {
+                height: 20px;
+                font-size: 10px;
+
+            }
+
+            .quote {
+                font-size: 14px;
+            }
+
+            .box {
+                padding: 32px 16px;
+            }
+
+            .progress {
+                font-size: 12px;
+            }
+
+            .textbox {
+                height: 64px;
+            }
+        }
+
+        .textbox {
+            height: 82px;
+            border: 1.5px solid rgba(0, 0, 0, 0.295);
+            margin-top: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            padding-left: 8px;
+            overflow: hidden;
+        }
+
+        #warning {
+            position: absolute;
+            color: red;
+            font-size: 12px;
+            display: none;
+        }
+
+        .cus_check {
+            border: 1.5px solid rgba(0, 0, 0, 0.374);
+            height: 24px;
+            width: 24px;
+            border-radius: 50px;
+            min-width: 24px;
+        }
+
+        .check_complete_txt {
+            text-decoration: line-through;
+            color: #48A300;
+        }
+
+        .check_complete {
+            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8mSOm0jLptn9OfIvT0vApv3S1N8ncNmWsLQ&s");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        .inputfield::placeholder {
+            color: rgba(128, 128, 128, 0.534);
+        }
+
+        .inputfield {
+            height: 100%;
+            width: 100%;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            padding-left: 12px;
+        }
+
+        #sun {
+            position: relative;
+            right: 8px;
+            animation: rot 20s ease-in-out infinite;
+        }
+
+        @keyframes rot {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="color: #48A300;">FOCUS ON <span style="color: #61481C;">TODAY</span></h1>
+    <div class="box">
+        <h2>Today <img id="sun"
+                src="https://png.pngtree.com/png-clipart/20201209/original/pngtree-sun-png-clipart-colored-png-image_5656301.png"
+                alt="sun"></h2>
+        <p class="quote">Raise the bar by completing your goals!</p>
+        <div class="bar">
+            <div class="progress">
+                <span id="numpro">0/3 completed</span>
+            </div>
+        </div>
+        <p id="warning">Please set all the goals!</p>
+        <div class="textbox">
+            <div class="cus_check"></div>
+            <input id="input1" placeholder="Add new goal..." type="text" name="" class="inputfield">
+        </div>
+        <div class="textbox">
+            <div class="cus_check"></div>
+            <input id="input2" placeholder="Add new goal..." type="text" name="" class="inputfield">
+        </div>
+        <div class="textbox">
+            <div class="cus_check"></div>
+            <input id="input3" placeholder="Add new goal..." type="text" name="" class="inputfield">
+        </div>
+        <h5 style="text-align: center;">“Move one step ahead, today!”</h5>
+        <p class="me">Made with ❤️ by Zarqan</p>
+    </div>
+    <script>
+        const inputfield = document.getElementsByClassName('inputfield');
+        const inputbtn = document.getElementsByClassName('cus_check');
+        const err = document.getElementById('warning');
+        let numpro = document.getElementById('numpro');
+        let num = 0;
+        const progress = document.querySelector('.progress');
+        const quote = document.querySelector('.quote');
+        const allQuote = [
+            'Raise the bar by completing your goals!',
+            'Well begun half is done!',
+            'Just a step away, keep going!',
+            'Whoa! You just completed all the goals, time for chill :D',
+        ]
+        let inputs = [
+            document.getElementById('input1'),
+            document.getElementById('input2'),
+            document.getElementById('input3')
+        ]
+        let allFilled = false;
+        let c = 0;
+        allFilled = inputs.every(input => input.value.trim() !== '');
+        for (let i = 0; i < inputbtn.length; i++) {
+            inputbtn[i].addEventListener('click', () => {
+                allFilled = inputs.every(input => input.value.trim() !== '');
+                if (allFilled) {
+                    inputbtn[i].classList.toggle('check_complete')
+                    inputfield[i].classList.toggle('check_complete_txt')
+
+                } else {
+                    err.style.display = 'block'
+                }
+                if (allFilled) {
+                    if (inputs[i].classList.contains("check_complete_txt")) {
+                        c++
+                        numpro.innerText = c + "/3 completed"
+                        progress.style.width = (c / 3) * 100 + '%';
+                        quote.innerText = allQuote[c];
+                    }
+                    else {
+                        c--
+                        numpro.innerText = c + "/3 completed"
+                        progress.style.width = (c / 3) * 100 + '%';
+                        quote.innerText = allQuote[c];
+                    }
+                }
+            });
+        }
+        allFilled = inputs.every(input => input.value.trim() !== '');
+        for (let i = 0; i < inputbtn.length; i++) {
+            inputfield[i].addEventListener("click", () => {
+                err.style.display = 'none'
+            })
+        }
+    </script>
+</body>
+
+</html>
