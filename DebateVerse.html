@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DebateVerse</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+:root {
+    --gradient-start: #2B6A4F;
+    --gradient-end: #A1D99B;
+    --gradient-bg: #e0e0e0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: poppins, Arial, sans-serif;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+    color: white;
+}
+
+.navbar .logo {
+    font-size: 24px;
+    display: flex;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #2e7d32;
+    text-decoration: underline;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        gap: 15px;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        border: 1px solid;
+        background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+        padding: 10px 0;
+        text-align: center;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}
+
+body {
+    background-color: var(--gradient-bg);
+    color: white;
+}
+
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    background: white;
+    /* padding: 20px; */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    color: black;
+    text-align: center;
+}
+
+h2 {
+    color: #ff5e62;
+}
+
+input {
+    width: 75%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #ff5e62;
+    border-radius: 5px;
+    outline: none;
+}
+
+.debate {
+    background: #fff;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s;
+}
+
+.debate:hover {
+    transform: scale(1.02);
+}
+
+.votes {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.vote-btn {
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    /* background: #ff5e62; */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+
+.debate-list {
+    margin-top: 20px;
+}
+
+.comment-section {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.comment-box {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #ff5e62;
+    border-radius: 5px;
+    outline: none;
+}
+
+.comment-btn {
+    padding: 8px 10px;
+    margin-top: 5px;
+    background: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.comment-btn:hover {
+    background: #218838;
+    transform: scale(1.05);
+}
+
+.comments {
+    margin-top: 10px;
+    text-align: left;
+    width: 80%;
+    padding: 8px;
+    background: #eee;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.body {
+    margin: 0;
+    padding: 50px;
+    text-align: center;
+    background-color: var(--gradient-bg);
+    color: white;
+}
+
+.container {
+    max-width: 600px;
+    margin: 2rem auto;
+    background: var(--gradient-end);
+    padding: 20px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+h2 {
+    color: #fff;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid var(--gradient-start);
+    border-radius: 5px;
+    outline: none;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    background: var(--gradient-start);
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background: #137e50;
+    transform: scale(1.05);
+}
+
+.debate {
+    background: #fff;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s;
+}
+
+.debate:hover {
+    transform: scale(1.02);
+}
+
+.votes {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.vote-btn {
+    padding: 10px 10px;
+    font-size: 24px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(234, 234, 234);
+    border: none;
+    cursor: pointer;
+}
+
+.l1 {
+    color: #195d29;
+}
+
+.d1 {
+    color: red;
+}
+
+.debate-list {
+    margin-top: 20px;
+}
+
+.comment-section {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.comment-box {
+    width: 80%;
+    padding: 8px;
+    border: 2px solid var(--gradient-start);
+    border-radius: 5px;
+    outline: none;
+}
+
+.comment-btn {
+    padding: 9px 10px;
+    margin-top: 5px;
+    background: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.comment-btn:hover {
+    background: #218838;
+    transform: scale(1.05);
+}
+
+.comments {
+    margin-top: 10px;
+    text-align: left;
+    width: 80%;
+    padding: 5px;
+    background: #eee;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+#trending-debates {
+    padding: 24px;
+    background-color: #e6f4ea;
+    border-radius: 10px;
+}
+
+#trending-debates h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    color: #1b5e20;
+}
+
+.debate-item {
+    background: white;
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #2e7d32;
+}
+
+.debate-item h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1b5e20;
+}
+
+.debate-item p {
+    font-size: 14px;
+    color: #388e3c;
+}
+
+.debate-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.participants {
+    font-size: 14px;
+    color: #388e3c;
+}
+
+.join-btn {
+    background: #2e7d32;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.debate-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.home-page {
+    color: #1b5e20;
+    font-size: 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    /* background-image: url(https://png.pngtree.com/background/20210710/original/pngtree-toilet-warm-reminder-slogan-background-picture-image_1060804.jpg); */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.main {
+    padding: 10px;
+}
+
+.fl {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.svg1 {
+    position: absolute;
+    left: 10%;
+    height: 500px;
+    width: 500px;
+    z-index: -1;
+}
+
+.svg2 {
+    position: absolute;
+    bottom: 15%;
+    right: 10%;
+    height: 250px;
+    width: 250px;
+    z-index: -1;
+}
+
+.svg3 {
+    position: absolute;
+    fill: #33c55593;
+    transform: rotate(135deg);
+    bottom: -250px;
+    left: 60%;
+    height: 350px;
+    width: 350px;
+    z-index: -1;
+}
+
+.top-para {
+    margin-top: 10px;
+    max-width: 700px;
+    font-weight: 500;
+    margin-inline: auto;
+    background-color: #eeffec;
+    padding: 10px;
+    border: 1px solid #2e7d3286;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.t1 {
+    position: relative;
+    left: 10%;
+    top: 10%;
+    border-radius: 13px 13px 13px 0px;
+}
+
+.t2 {
+    position: relative;
+    right: 10%;
+    bottom: 10%;
+    border-radius: 13px 13px 0px 13px;
+}
+
+footer {
+    background: #1dad3f;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.footer-section {
+    width: 30%;
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+
+.footer-section h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    border-bottom: 2px solid #1b5e20;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin: 8px 0;
+}
+
+.footer-section ul li a {
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #1b5e20;
+}
+
+.social-icons a {
+    font-size: 22px;
+    color: white;
+    margin: 0 8px;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    color: #00721b;
+}
+
+.footer-bottom {
+    background: #388e3c;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.main {
+    overflow: hidden;
+    max-width: 100vw;
+}
+@media (max-width: 1050px) {
+    .svg1, .svg2, .svg3 {
+        display: none;
+    }
+    .top-para{
+        font-size: 16px;
+    }
+    .t1{
+        left: 1px;
+    }
+    .t2{
+        left: 1px;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo"><img style="transform: translateY(-2px); height: 32px;"
+                src="https://img.icons8.com/?size=100&id=110879&format=png&color=40C057" alt=""><span>ebate</span><img
+                style="transform: translateY(-2px); height: 32px;"
+                src="https://img.icons8.com/?size=100&id=110893&format=png&color=40C057" alt=""><span
+                style="transform: translateX(-5px);">erse</span></div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Help</a></li>
+        </ul>
+        <div class="menu-toggle">&#9776;</div>
+    </nav>
+    <div class="main">
+        <section class="home-page">
+
+            <h1 style="text-align: center;">Welcome to DebateVerse</h1>
+            <p class="top-para t1">
+                "At DEBATEVERSE, we ensure that every discussion remains respectful and inclusive. Our community is a
+                space where all ideas are welcomed, but personal attacks and hostility are not. Everyone deserves a
+                platform where they can present their ideas without fear of disrespect or discrimination."
+            </p>
+            <p class="top-para t2">
+                "Engage in thought-provoking discussions, vote on compelling arguments, and share your insights with
+                a
+                dynamic community. Whether you're here to refine your debating skills or challenge opinions, this
+                platform provides a structured and interactive space for meaningful conversations. Join the debate
+                and
+                make your voice heard!"
+            </p>
+
+            <svg class="svg1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" id="SvgjsSvg1088" width="200"
+                height="200" x="0" y="0" style="enable-background:new 0 0 512 512" version="1.1" viewBox="0 0 512 512"
+                xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs">
+                <path
+                    d="M269.723 232.29h-27.427c-5.523 0-10 4.477-10 10v27.427c0 5.523 4.477 10 10 10h27.427c5.523 0 10-4.477 10-10V242.29c0-5.522-4.477-10-10-10zM192.296 77.437h-27.428c-5.523 0-10 4.477-10 10v27.427c0 5.523 4.477 10 10 10h27.428c5.523 0 10-4.477 10-10V87.437c0-5.523-4.477-10-10-10zm25.02 357.134h52.407c5.523 0 10-4.477 10-10V319.717c0-5.523-4.477-10-10-10H164.868c-5.523 0-10 4.477-10 10V424.57c0 5.523 4.477 10 10 10h52.428l.02.001zm129.835-47.427h-27.428c-5.523 0-10 4.477-10 10v27.427c0 5.523 4.477 10 10 10h27.428c5.523 0 10-4.477 10-10v-27.427c0-5.523-4.477-10-10-10zm0-184.854c5.523 0 10-4.477 10-10V87.437c0-5.523-4.477-10-10-10H242.296c-5.523 0-10 4.477-10 10v104.854c0 5.523 4.477 10 10 10h104.855zm-154.855 77.427c5.523 0 10-4.477 10-10V164.863c0-5.523-4.477-10-10-10H87.442c-5.523 0-10 4.477-10 10v104.853c0 5.523 4.477 10 10 10h104.854zm282.283 77.427h27.418c5.523 0 10-4.477 10-10v-27.427c0-5.523-4.477-10-10-10h-27.418c-5.523 0-10 4.477-10 10v27.427c0 5.523 4.477 10 10 10zm-387.137 0h27.427c5.523 0 10-4.477 10-10v-27.427c0-5.523-4.477-10-10-10H87.442c-5.523 0-10 4.477-10 10v27.427c0 5.523 4.477 10 10 10zm387.137-202.28c-5.523 0-10 4.477-10 10v104.854c0 5.523 4.477 10 10 10h27.418c5.523 0 10-4.477 10-10V164.864c0-5.523-4.477-10-10-10h-27.418zm-87.428-40c0 5.523 4.477 10 10 10h104.846c5.523 0 10-4.477 10-10V10c0-5.523-4.477-10-10-10H397.151c-5.523 0-10 4.477-10 10v104.864zm37.428 242.28c5.523 0 10-4.477 10-10V242.29c0-5.523-4.477-10-10-10H319.723c-5.523 0-10 4.477-10 10v104.854c0 5.523 4.477 10 10 10h104.856zM37.433 154.864h-27.43c-5.523 0-10 4.477-10 10v27.427c0 5.523 4.477 10 10 10h27.43c5.523 0 10-4.477 10-10v-27.427c0-5.523-4.477-10-10-10zm387.146 0h-27.428c-5.523 0-10 4.477-10 10v27.427c0 5.523 4.477 10 10 10h27.428c5.523 0 10-4.477 10-10v-27.427c0-5.523-4.478-10-10-10zm-269.71 319.707V502c0 5.523 4.477 10 10 10h27.428c5.523 0 10-4.477 10-10v-27.429c0-5.523-4.477-10-10-10h-27.428c-5.523 0-10 4.477-10 10zm357.128-77.427c0-5.523-4.477-10-10-10H397.151c-5.523 0-10 4.477-10 10V502c0 5.523 4.477 10 10 10h104.846c5.523 0 10-4.477 10-10V397.144zm-279.701 77.429V502c0 5.523 4.477 10 10 10h104.855c5.523 0 10-4.477 10-10v-27.427c0-5.523-4.477-10-10-10H242.296c-5.523 0-10 4.477-10 10zM.003 397.147V502c0 5.523 4.477 10 10 10H114.86c5.523 0 10-4.477 10-10V397.147c0-5.523-4.477-10-10-10H10.003c-5.522 0-10 4.477-10 10zM37.429 232.29H10.003c-5.523 0-10 4.477-10 10v104.854c0 5.523 4.477 10 10 10h27.426c5.523 0 10-4.477 10-10V242.29c0-5.522-4.477-10-10-10zM217.296 47.437h52.427c5.523 0 10-4.477 10-10V10c0-5.523-4.477-10-10-10H164.869c-5.523 0-10 4.477-10 10v27.437c0 5.523 4.477 10 10 10h52.427zm139.855-10V10c0-5.523-4.477-10-10-10h-27.428c-5.523 0-10 4.477-10 10v27.437c0 5.523 4.477 10 10 10h27.428c5.523 0 10-4.477 10-10zM.003 114.864c0 5.523 4.477 10 10 10H114.86c5.523 0 10-4.477 10-10V10c0-5.523-4.477-10-10-10H10.003c-5.523 0-10 4.477-10 10v104.864z"
+                    fill="rgba(161, 217, 155, 1)"></path>
+            </svg>
+            <svg class="svg2" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 64 64"
+                version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs">
+                <path id="SvgjsPath1092"
+                    d="M4 15.51a1 1 0 0 0 .71-.29L15.22 4.71a1 1 0 1 0-1.42-1.42L3.29 13.8a1 1 0 0 0 0 1.42 1 1 0 0 0 .71.29zm0 11.38a1 1 0 0 0 .71-.29L26.6 4.71a1 1 0 1 0-1.42-1.42L3.29 25.18a1 1 0 0 0 0 1.42 1 1 0 0 0 .71.29zm0 11.36a1 1 0 0 0 .71-.25L38 4.71a1 1 0 1 0-1.42-1.42L3.29 36.54a1 1 0 0 0 0 1.42 1 1 0 0 0 .71.29zm0 11.38a1 1 0 0 0 .71-.29L49.34 4.71a1 1 0 1 0-1.42-1.42L3.29 47.92a1 1 0 0 0 0 1.42 1 1 0 0 0 .71.29zM60.71 3.29a1 1 0 0 0-1.42 0l-56 56a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l56-56a1 1 0 0 0 0-1.42zm-1.42 11.37L14.66 59.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l44.63-44.63a1 1 0 0 0-1.42-1.42zm0 11.34L26 59.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l33.29-33.25A1 1 0 0 0 59.29 26zm0 11.4L37.4 59.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0l21.89-21.89a1 1 0 0 0-1.42-1.42zm0 11.38L48.78 59.29a1 1 0 0 0 0 1.42 1 1 0 0 0 1.42 0L60.71 50.2a1 1 0 0 0-1.42-1.42z"
+                    data-name="Layer 9" fill="rgba(161, 217, 155, 1)"></path>
+            </svg>
+            <svg class="svg3" xmlns="http://www.w3.org/2000/svg" id="Capa_1" width="200" height="200" x="0" y="0"
+                version="1.1" viewBox="0 0 402.85 402.851">
+                <path
+                    d="M97.158 402.851c.717 0 1.434-.275 1.984-.822l50.721-50.715a2.804 2.804 0 0 0 0-3.962l-46.721-46.718 48.767-48.769c1.086-1.084 1.086-2.867 0-3.961l-46.537-46.523 49.002-49.002a2.805 2.805 0 0 0 0-3.962l-46.715-46.72 48.767-48.766a2.807 2.807 0 0 0 0-3.962L108.276.821a2.799 2.799 0 0 0-3.961 0 2.804 2.804 0 0 0 0 3.961l46.167 46.165-48.739 48.736a2.808 2.808 0 0 0 0 3.961c.08.08.175.107.257.17.096.134.153.285.271.402l46.166 46.172L99.7 199.124c-.696.695-.898 1.653-.715 2.545a2.79 2.79 0 0 0 .808 2.041l46.167 46.183-48.739 48.723c-1.085 1.096-1.085 2.879 0 3.963.08.087.17.114.254.164.094.131.145.284.273.405l46.166 46.161-48.731 48.728c-1.092 1.095-1.092 2.884 0 3.962.533.586 1.258.852 1.975.852zm75.624 0a2.8 2.8 0 0 0 1.982-.822l50.718-50.715a2.822 2.822 0 0 0 0-3.962l-46.712-46.718 48.771-48.769c1.078-1.084 1.078-2.867 0-3.961L181 201.381l49.007-49.002a2.813 2.813 0 0 0 0-3.962l-46.715-46.714 48.769-48.767a2.802 2.802 0 0 0 0-3.961L183.908.832a2.8 2.8 0 1 0-3.961 3.961l46.165 46.165-48.731 48.737a2.804 2.804 0 0 0 0 3.961c.074.074.161.101.246.164.096.134.146.29.274.408l46.171 46.173-48.735 48.736c-.689.69-.892 1.643-.713 2.534a2.806 2.806 0 0 0 .806 2.06l46.184 46.178-48.766 48.721a2.818 2.818 0 0 0 0 3.962c.08.076.17.115.248.153.101.131.152.295.28.405l46.164 46.174-48.734 48.727a2.799 2.799 0 0 0 0 3.961c.533.573 1.25.839 1.976.839zm75.627 0a2.77 2.77 0 0 0 1.983-.822l50.726-50.715a2.804 2.804 0 0 0 0-3.962l-46.72-46.718 48.765-48.769a2.8 2.8 0 0 0 0-3.961l-46.532-46.523 49.007-49.002a2.846 2.846 0 0 0 0-3.962l-46.732-46.72 48.769-48.766a2.814 2.814 0 0 0 0-3.962L259.517.821c-1.094-1.095-2.883-1.095-3.961 0a2.802 2.802 0 0 0 0 3.961l46.155 46.165-48.728 48.736a2.8 2.8 0 0 0 0 3.961c.079.08.159.107.263.17.109.134.139.285.265.402l46.173 46.172-48.746 48.736c-.69.695-.876 1.653-.71 2.545a2.769 2.769 0 0 0 .818 2.041l46.173 46.183-48.742 48.723c-1.083 1.096-1.083 2.879 0 3.963.075.087.164.114.249.164.102.131.134.284.274.405l46.173 46.161-48.731 48.728c-1.097 1.095-1.097 2.884 0 3.962a2.615 2.615 0 0 0 1.967.852z">
+                </path>
+                </path>
+                <defs>
+                    <linearGradient id="SvgjsLinearGradient1055">
+                        <stop stop-color="#f5f7fa" offset="0"></stop>
+                        <stop stop-color="#c3cfe2" offset="1"></stop>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </section>
+        <div class="container">
+            <h2>Debate Platform</h2>
+            <input type="text" id="debateInput" placeholder="Enter debate topic">
+            <div class="fl">
+                <button onclick="addDebate()">Start Debate</button>
+                <button onclick="suggestTopic()">Suggest Topic</button>
+            </div>
+            <div class="debate-list" id="debateList"></div>
+        </div>
+        <section id="trending-debates">
+            <h2>Trending Debates</h2>
+            <div class="debate-container">
+                <!-- Debate Item 1 -->
+                <div class="debate-item">
+                    <h3>Should AI Replace Human Jobs?</h3>
+                    <p>AI is evolving rapidly, but should it take over human employment?</p>
+                    <div class="debate-footer">
+                        <span class="participants">1.2K Participants</span>
+                        <button class="join-btn">Join Debate</button>
+                    </div>
+                </div>
+
+                <!-- Debate Item 2 -->
+                <div class="debate-item">
+                    <h3>Is Climate Change a Global Emergency?</h3>
+                    <p>Rising temperatures, melting ice caps—should urgent action be taken?</p>
+                    <div class="debate-footer">
+                        <span class="participants">980 Participants</span>
+                        <button class="join-btn">Join Debate</button>
+                    </div>
+                </div>
+
+                <!-- Debate Item 3 -->
+                <div class="debate-item">
+                    <h3>Should Social Media Be Regulated?</h3>
+                    <p>Should governments impose restrictions on social media platforms?</p>
+                    <div class="debate-footer">
+                        <span class="participants">750 Participants</span>
+                        <button class="join-btn">Join Debate</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Join the best debate platform and engage in intellectual discussions on trending topics.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Debates</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class='bx bxl-facebook'></i></a>
+                    <a href="#"><i class='bx bxl-twitter'></i></a>
+                    <a href="#"><i class='bx bxl-instagram'></i></a>
+                    <a href="#"><i class='bx bxl-linkedin'></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 DebateVerse | All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        const topics = [
+            "Should social media platforms regulate free speech?",
+            "Is artificial intelligence a threat to humanity?",
+            "Should college education be free?",
+            "Is climate change the biggest issue of our time?",
+            "Should animals be used for scientific testing?",
+            "Is a universal basic income a good idea?",
+            "Should the voting age be lowered to 16?",
+            "Are electric cars the future of transportation?",
+            "Should homework be banned in schools?",
+            "Is space exploration worth the cost?",
+            "Should junk food advertising be restricted?",
+            "Are video games harmful or beneficial?",
+            "Should capital punishment be abolished?",
+            "Is homeschooling better than traditional schooling?",
+            "Should the government regulate social media?",
+            "Are beauty pageants exploitative?",
+            "Should we have a four-day workweek?",
+            "Is cryptocurrency a reliable investment?",
+            "Should school uniforms be mandatory?",
+            "Is technology making people less social?",
+            "Should the drinking age be lowered?",
+            "Are reality TV shows harmful to society?",
+            "Should plastic be banned?",
+            "Is censorship justified in any circumstances?",
+            "Should violent video games be banned?"
+        ];
+
+        function addDebate(topic = null) {
+            let input = document.getElementById("debateInput");
+            let debateTopic = topic || input.value.trim();
+            if (debateTopic === "") return;
+
+            let debateList = document.getElementById("debateList");
+            let debate = document.createElement("div");
+            debate.className = "debate";
+            debate.innerHTML = `
+        <h3>${debateTopic}</h3>
+        <div class="votes">
+            <button class="vote-btn l1" style="background: rgb(234, 234, 234);" onclick="fillg(this)"><i class='bx bx-like'></i></button>
+            <button class="vote-btn d1" style="background: rgb(234, 234, 234);" onclick="fillr(this)"><i class='bx bx-dislike'></i></button>
+        </div>
+        <div class="comment-section">
+            <input type="text" class="comment-box" placeholder="Add a comment">
+            <button class="comment-btn" onclick="addComment(this)">Comment</button>
+            <div class="comments"></div>
+        </div>
+    `;
+            debateList.prepend(debate);
+            input.value = "";
+        }
+
+        function fillg(button) {
+            let dislikeButton = button.parentElement.querySelector(".d1"); // Find corresponding dislike button
+
+            if (button.innerHTML.includes("bxs-like")) {
+                button.innerHTML = "<i class='bx bx-like'></i>"; // Unfill like
+            } else {
+                button.innerHTML = "<i class='bx bxs-like'></i>"; // Fill like
+                dislikeButton.innerHTML = "<i class='bx bx-dislike'></i>"; // Reset dislike (if active)
+            }
+        }
+
+        function fillr(button) {
+            let likeButton = button.parentElement.querySelector(".l1"); // Find corresponding like button
+
+            if (button.innerHTML.includes("bxs-dislike")) {
+                button.innerHTML = "<i class='bx bx-dislike'></i>"; // Unfill dislike
+            } else {
+                button.innerHTML = "<i class='bx bxs-dislike'></i>"; // Fill dislike
+                likeButton.innerHTML = "<i class='bx bx-like'></i>"; // Reset like (if active)
+            }
+        }
+
+
+        // function fillg(button) {
+        //     if (button.innerHTML.includes("bxs-like")) { // Check if the button is already filled
+        //         button.innerHTML = "<i class='bx bx-like'></i>"; // Change to unfilled like
+        //     } else {
+        //         button.innerHTML = "<i class='bx bxs-like'></i>"; // Change to filled like
+        //     }
+        // }
+
+
+        // function fillr(button) {
+        //     if (button.innerHTML.includes("bxs-dislike")) {
+        //         button.innerHTML = "<i class='bx bx-dislike'></i>";
+        //     } else {
+        //         button.innerHTML = "<i class='bx bxs-dislike'></i>";
+        //     }
+        // }
+
+
+
+        function suggestTopic() {
+            let randomTopic = topics[Math.floor(Math.random() * topics.length)];
+            document.getElementById("debateInput").value = randomTopic;
+        }
+
+        // function vote(button, value) {
+        //     let countSpan = button.querySelector("span");
+        //     let count = parseInt(countSpan.innerText) + value;
+        //     countSpan.innerText = count;
+        // }
+
+
+        function addComment(button) {
+            let commentBox = button.previousElementSibling;
+            let commentText = commentBox.value.trim();
+            if (commentText === "") return;
+
+            let commentsDiv = button.nextElementSibling;
+            let comment = document.createElement("div");
+            comment.className = "comments";
+            comment.innerText = commentText;
+
+            commentsDiv.appendChild(comment);
+            commentBox.value = "";
+        }
+
+    </script>
+</body>
+
+</html>
